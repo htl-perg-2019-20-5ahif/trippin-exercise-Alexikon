@@ -5,12 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace TripPinConsumer
 {
-    public class Users
-    {
-        public List<User> Results { get; set; }
-    }
-
-    public class User
+    public class JsonUser
     {
         [JsonPropertyName("UserName")]
         public string UserName { get; set; }
