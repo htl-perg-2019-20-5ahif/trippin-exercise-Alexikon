@@ -29,7 +29,7 @@ namespace TripPinConsumer
                 var tripPinResponse = await HttpClient.GetAsync("People(\'" + user.UserName + "\')");
 
                 // if user does not exist, create that user
-                if(!tripPinResponse.IsSuccessStatusCode)
+                if (!tripPinResponse.IsSuccessStatusCode)
                 {
                     // create ServiceUser from JsonUser
                     var serviceUser = user.CreateServiceUser();
@@ -45,7 +45,7 @@ namespace TripPinConsumer
 
                         Console.WriteLine("Created Person " + user.UserName);
                     }
-                    catch(HttpRequestException e)
+                    catch (HttpRequestException e)
                     {
                         Console.WriteLine("Failed to create Person " + user.UserName);
                     }

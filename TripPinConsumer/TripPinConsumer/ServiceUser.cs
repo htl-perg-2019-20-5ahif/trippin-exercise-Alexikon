@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace TripPinConsumer
@@ -12,13 +10,13 @@ namespace TripPinConsumer
 
         [JsonPropertyName("FirstName")]
         public string FirstName { get; set; }
-        
+
         [JsonPropertyName("LastName")]
         public string LastName { get; set; }
-        
+
         [JsonPropertyName("Emails")]
         public List<string> Emails { get; set; }
-        
+
         [JsonPropertyName("AddressInfo")]
         public List<AddressInfo> AddressInfo { get; set; }
     }
