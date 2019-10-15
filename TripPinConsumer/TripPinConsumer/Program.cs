@@ -31,25 +31,11 @@ namespace TripPinConsumer
                 // if user does not exist, create that user
                 if(!tripPinResponse.IsSuccessStatusCode)
                 {
-                    var city = new City();
-                    city.Name = user.CityName;
-                    city.CountryRegion = user.Country;
-
-                    var addressInfo = new AddressInfo();
-                    addressInfo.Address = user.Address;
-                    addressInfo.City = city;
-
-                    var userService = new ServiceUser();
-                    userService.UserName = user.UserName;
-                    userService.FirstName = user.FirstName;
-                    userService.LastName = user.LastName;
-                    userService.Emails = new List<string>();
-                    userService.Emails.Add(user.Email);
-                    userService.AddressInfo = new List<AddressInfo>();
-                    userService.AddressInfo.Add(addressInfo);
+                    // create ServiceUser from JsonUser
+                    var serviceUser = user.CreateServiceUser();
 
                     // post the user to Service
-                    var content = new StringContent(JsonSerializer.Serialize(userService), Encoding.UTF8, "application/json");
+                    var content = new StringContent(JsonSerializer.Serialize(serviceUser), Encoding.UTF8, "application/json");
                     var postResponse = await HttpClient.PostAsync("People", content);
 
                     // watch if user is successfully created
@@ -59,7 +45,7 @@ namespace TripPinConsumer
 
                         Console.WriteLine("Created Person " + user.UserName);
                     }
-                    catch(Exception e)
+                    catch(HttpRequestException e)
                     {
                         Console.WriteLine("Failed to create Person " + user.UserName);
                     }

@@ -27,5 +27,27 @@ namespace TripPinConsumer
 
         [JsonPropertyName("Country")]
         public string Country { get; set; }
+
+        public ServiceUser CreateServiceUser()
+        {
+            var city = new City();
+            city.Name = this.CityName;
+            city.CountryRegion = this.Country;
+
+            var addressInfo = new AddressInfo();
+            addressInfo.Address = this.Address;
+            addressInfo.City = city;
+
+            var userService = new ServiceUser();
+            userService.UserName = this.UserName;
+            userService.FirstName = this.FirstName;
+            userService.LastName = this.LastName;
+            userService.Emails = new List<string>();
+            userService.Emails.Add(this.Email);
+            userService.AddressInfo = new List<AddressInfo>();
+            userService.AddressInfo.Add(addressInfo);
+
+            return userService;
+        }
     }
 }
